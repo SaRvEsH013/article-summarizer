@@ -14,7 +14,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-
+from sentence_transformers import SentenceTransformer
 
 
 # Set the OpenAI API key
@@ -53,7 +53,6 @@ if st.sidebar.button("Process URLs"):
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         docs = text_splitter.split_documents(loaders)
 
-        from sentence_transformers import SentenceTransformer
         encoder = SentenceTransformer('all-mpnet-base-v2')
         vectors = encoder.encode([doc.page_content for doc in docs])
 
